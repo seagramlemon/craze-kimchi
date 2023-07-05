@@ -16,7 +16,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <div>{text}</div>
+      <div>{text} 수정</div>
     </div>
   );
 }
