@@ -1,40 +1,60 @@
 /* footer 스타일 */
 #footer * {
-    font-size : 12px;
-    color: #4e4e4e;
+  font-size: 12px;
+  color: #4e4e4e;
+}
+#footer {
+  padding: 30px 0px;
+}
+#footer > div {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+#footer_1 {
+  overflow: hidden;
+  height: 20%;
+  padding-top: 10px;
+}
+#footer_2 {
+  height: 65%;
+  overflow: hidden;
+}
+#footer_3 {
+  height: 15%;
 }
 
-#footer>div { width : 100%; }
-#footer_1 { 
-    height : 20%; 
-    padding-top : 10px;
-}
-#footer_2 { height : 65%; }
-#footer_3 { height : 15%; }
-
-#footer_1>a {
-    text-decoration : none;
-    font-weight : 600;
-    margin : 15px;
-    vertical-align : middle;
-    color : #f44336;
+#footer_1 > a {
+  text-decoration: none;
+  font-weight: 600;
+  margin: 15px;
+  vertical-align: middle;
+  color: #f44336;
 }
 
-#p1, #p2, #p3 { 
-    height : 100%; 
-    float : left;
-    margin : 0px;
-    box-sizing : border-box;
-    font-size : 12px;
-    padding-left : 15px;
-    line-height : 20px;
+#p1,
+#p2,
+#p3 {
+  height: 100%;
+  float: left;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 12px;
+  padding-left: 15px;
+  line-height: 20px;
 }
-#p1 { width : 30%; }
-#p2 { width : 40%; }
-#p3 { width : 30%; }
+#p1 {
+  width: 30%;
+}
+#p2 {
+  width: 40%;
+}
+#p3 {
+  width: 30%;
+}
 
-#footer_3 { 
-    text-align : center; 
-    padding-top : 5px;
+#footer_3 {
+  text-align: center;
+  padding-top: 5px;
 }
 /* footer 스타일 */

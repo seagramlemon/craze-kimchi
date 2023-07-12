@@ -1,56 +1,76 @@
 /* content 스타일 */
 #content {
-    width : 100%;
-    margin : auto;
+  width: 100%;
+  margin: auto;
+  padding: 50px 0px;
 }
 
-#content>#content_1, #content>#content_2, #content>#content_3 {
-    width : 100%;
-    text-align : center;
+#content > #content_1,
+#content > #content_2,
+#content > #content_3 {
+  width: 100%;
+  text-align: center;
 }
-#content_1 { height : 32%; }
-#content_2 { height : 34%; }
-#content_3 { height : 34%; }
+#content_1 {
+  height: 32%;
+}
+#content_2 {
+  height: 34%;
+}
+#content_3 {
+  height: 34%;
+}
 
 #content .title {
-    text-align : center;
-    font-size : 25px;
-    font-weight : 900;
-    width : 100%;
-    height : 10%;
-    color: #4e4e4e;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 900;
+  width: 100%;
+  height: 10%;
+  color: #4e4e4e;
+  padding: 30px 0px;
 }
 #content .list {
-    width : 100%;
-    height : 90%;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
-#content .list>div {
-    display : inline-block;
-    width : 30%;
-    margin : 5px;
-    color: #4e4e4e;
+#content .list > div {
+  display: inline-block;
+  width: 30%;
+  margin: 5px;
+  color: #4e4e4e;
+}
+.swiper img {
+  width: 100%;
+}
+.imgContent {
+  display: flex;
+  height: 432px;
+  padding-bottom: 20px;
+}
+.imgContent > img {
+  width: 100%;
+  object-fit: cover;
+}
+.imgContent > img:hover {
+  opacity: 0.75;
+  cursor: pointer;
 }
 
-.imgContent>img { 
-    width : 100%; 
-    height : 300px;
+.textContent {
+  line-height: 30px;
+  text-align: left;
 }
-.imgContent>img:hover { 
-    opacity : 0.75;
-    cursor : pointer;
+.textContent > .productName {
+  font-weight: 700;
+  font-size: 16px;
 }
-
-.textContent { 
-    line-height : 30px; 
-    text-align : left;
-}
-.textContent>.productName { 
-    font-weight : 700; 
-    font-size : 16px;
-}
-.textContent>.price { 
-    font-weight : 700; 
-    font-size : 13px;
-    color : #f44336;
+.textContent > .price {
+  font-weight: 700;
+  font-size: 13px;
+  color: #f44336;
 }
 /* content 스타일 */
