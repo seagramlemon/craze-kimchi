@@ -18,4 +18,11 @@ public class MemberService {
 		return memberMapper.memberList();
 	}
 
+	public Member selectOneMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectOne(member);
+	}
+
+	
+
 }

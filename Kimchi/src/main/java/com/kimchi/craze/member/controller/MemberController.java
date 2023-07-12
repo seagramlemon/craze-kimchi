@@ -22,4 +22,11 @@ public class MemberController {
 		List<Member> list = memberService.selectMemberList();
 		return list;
 	}
+	@GetMapping(value="/test")
+	public Member member(Member member) {
+		
+		Member m = memberService.selectOneMember(member);
+		return m;
+	}
+	
 }

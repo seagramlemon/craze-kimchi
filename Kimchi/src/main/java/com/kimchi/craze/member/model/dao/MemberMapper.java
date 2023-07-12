@@ -11,4 +11,8 @@ import com.kimchi.craze.member.model.vo.Member;
 public interface MemberMapper {
 	@Select(value = "select * from member_tbl")
 	public List<Member> memberList();
+
+	@Select(value = "select * from member_tbl where member_id=#{memberId} and member_pw=#{memberPw}")
+	public Member selectOne(Member member);
+	
 }
