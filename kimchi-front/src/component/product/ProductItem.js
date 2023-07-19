@@ -1,18 +1,18 @@
-function ProductItem() {
-
-    return (
-        <div>                    
-            <div className="imgContent">
-                <img src="https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg" />
-            </div>
-            <div className="textContent">
-                <span className="productName">파김치 2kg</span> <br />
-                <span className="price">30,000원</span>
-            </div>
-        </div>
-    );
-
+import { useState } from "react";
+import "./ProductItem.css";
+function ProductItem(props) {
+  const [product, setProduct] = useState(props.product);
+  return (
+    <div className="productItem">
+      <div className="imgContent">
+        <img src={product.img} />
+      </div>
+      <div className="textContent">
+        <span className="productName">{product.productName}</span> <br />
+        <span className="price">{product.price}</span>
+      </div>
+    </div>
+  );
 }
 
 export default ProductItem;
-

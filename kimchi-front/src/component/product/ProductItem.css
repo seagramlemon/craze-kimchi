@@ -1,0 +1,39 @@
+.productTitle {
+  margin: 100px;
+  text-align: center;
+}
+
+.productItem {
+  display: inline-block;
+  width: 30%;
+  margin: 5px;
+  color: #4e4e4e;
+}
+
+.imgContent {
+  display: flex;
+  height: 432px;
+  padding-bottom: 20px;
+}
+.imgContent > img {
+  width: 100%;
+  object-fit: cover;
+}
+.imgContent > img:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.textContent {
+  line-height: 30px;
+  text-align: left;
+}
+.textContent > .productName {
+  font-weight: 700;
+  font-size: 16px;
+}
+.textContent > .price {
+  font-weight: 700;
+  font-size: 13px;
+  color: #f44336;
+}
