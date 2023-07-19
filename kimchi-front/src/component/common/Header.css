@@ -1,83 +1,92 @@
 /** 전체 요소 초기화 **/
 * {
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    color: #4e4e4e;
-    text-decoration: none;
-  }
-  /* header */
-  .header {
-    width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between
-  }
-  .site-logo > a {
-    display: block;
-    height: 150px;
-  }
-  .site-logo img {
-    width: 300px;
-    height: 150px;
-    object-fit: cover;
-  }
-  .header > .search-box {
-    width: 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .search-box > input {
-    width: 450px;
-    border-bottom: 2px solid #f44336;
-    padding: 10px;
-    font-size: 24px;
-  }
-  .search-box > button {
-    background-color: transparent;
-  }
-  #search-btn {
-    color: #f44336;
-    font-size: 48px;
-    cursor: pointer;
-  }
-  
-  .header > .member-link {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .header > .member-link > a {
-    margin-left: 20px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #f44336;
-  }
-  .header > .member-link > a:hover {
-    text-decoration: underline;
-  }
-  
-  /*main-nav*/
-  .main-nav {
-    width: 1200px;
-    margin: 0 auto;
-  }
-  .main-nav > ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-  }
-  .main-nav > ul > li {
-    text-align: center;
-    width: calc(100% / 4);
-  }
-  .main-nav > ul > li > a {
-    color: #f44336;
-  }
-  .main-nav > ul > li > a:hover {
-    font-weight: bold;
-  }
-  
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  color: #4e4e4e;
+  text-decoration: none;
+}
+/* header */
+.header {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.site-logo > a {
+  display: block;
+  height: 70px;
+  overflow: hidden;
+}
+.site-top,
+.site-bottom {
+  width: 300px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../../public/image/logo_t.png);
+}
+.site-top {
+  background-position-y: 30%;
+}
+.site-bottom {
+  background-position-y: 66%;
+}
+.header > .search-box {
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-box > input {
+  width: 450px;
+  border-bottom: 2px solid #f44336;
+  padding: 10px;
+  font-size: 24px;
+}
+.search-box > button {
+  background-color: transparent;
+}
+#search-btn {
+  color: #f44336;
+  padding-top: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.header > .member-link {
+  display: flex;
+  align-items: center;
+}
+.header > .member-link > a > span {
+  font-size: 36px;
+  color: #f44336;
+  margin-left: 36px;
+}
+.header > .member-link > a:hover {
+  text-decoration: underline;
+}
+
+/*main-nav*/
+.main-nav {
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.main-nav > ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+.main-nav > ul > li {
+  text-align: center;
+  width: calc(100% / 4);
+}
+.main-nav > ul > li > a {
+  color: #f44336;
+}
+.main-nav > ul > li > a:hover {
+  font-weight: bold;
+}
