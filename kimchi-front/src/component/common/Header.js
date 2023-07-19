@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import SwiperCore, { Autoplay } from "swiper";
 import { useState } from "react";
+import {Routes, Route, Link} from 'react-router-dom';
+
 function Header() {
   const [swiper, setSwiper] = useState(null);
 
@@ -40,27 +42,27 @@ function Header() {
           </button>
         </div> */}
         <div className="member-link">
-          <a href="#" title="로그인">
+          <Link to="#" title="로그인">
             <span class="material-icons">login</span>
-          </a>
-          <a href="#" title="회원가입">
+          </Link>
+          <Link to="#" title="회원가입">
             <span class="material-icons">assignment_ind</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="main-nav">
         <ul>
           <li>
-            <a href="#">PRODUCT</a>
+            <Link to="product">PRODUCT</Link>
           </li>
           <li>
-            <a href="#">NOTICE</a>
+            <Link to="notice">NOTICE</Link>
           </li>
           <li>
-            <a href="#">REVIEW</a>
+            <Link to="review">REVIEW</Link>
           </li>
           <li>
-            <a href="#">COMMUNITY</a>
+            <Link to="community">COMMUNITY</Link>
           </li>
         </ul>
       </div>
