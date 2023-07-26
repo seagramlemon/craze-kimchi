@@ -45,7 +45,7 @@ function Header() {
           <Link to="#" title="로그인">
             <span class="material-icons">login</span>
           </Link>
-          <Link to="#" title="회원가입">
+          <Link to="login" title="회원가입">
             <span class="material-icons">assignment_ind</span>
           </Link>
         </div>

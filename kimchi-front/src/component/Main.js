@@ -6,6 +6,7 @@ import ProductContent from "./product/ProductContent";
 import NoticeContent from "./notice/NoticeContent";
 import ReviewContent from "./review/ReviewContent";
 import CommunityContent from "./community/CommunityContent";
+import LoginContent from "./member/LoginContent";
 import { Routes, Route, Link } from "react-router-dom";
 
 function Main() {
@@ -19,6 +20,7 @@ function Main() {
           <Route path="/notice" element={<NoticeContent />} />
           <Route path="/review" element={<ReviewContent />} />
           <Route path="/community" element={<CommunityContent />} />
+          <Route path="/login" element={<LoginContent />} />
         </Routes>
       </div>
       <Footer />
