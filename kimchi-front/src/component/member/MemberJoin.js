@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, CheckBox, Input } from "../util/InputFrm";
 import "./MemberJoin.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const MemberJoin = () => {
   const inputStatusCheck = (input) => {
     return (
@@ -221,6 +222,7 @@ const MemberJoin = () => {
     checkFunction: inputStatusCheck,
     msg: emailMsg,
   });
+  const navigate = useNavigate();
   const memberEnroll = () => {
     const useCheck = document.querySelector("#useCheck");
     const privacyCheck = document.querySelector("#privacyCheck");
@@ -240,7 +242,11 @@ const MemberJoin = () => {
         memberEmail: memberEmail,
       };
       axios.post("/member/enroll", param).then((res) => {
-        console.log(res.data);
+        if (res.data == 1) {
+          navigate("/login");
+        } else {
+          navigate("/");
+        }
       });
     } else {
       alert("약관체크나, 입력값 확인, 디자인은 나중에");
