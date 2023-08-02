@@ -150,7 +150,7 @@ const MemberJoin = () => {
   const timeStart = () => {
     const min = document.querySelector("#auth-min");
     const sec = document.querySelector("#auth-sec");
-    min.innerText = 1;
+    min.innerText = 5;
     sec.innerText = "00";
     const interval = window.setInterval(() => {
       const currMin = Number(min.innerText);
@@ -224,8 +224,24 @@ const MemberJoin = () => {
   const memberEnroll = () => {
     const useCheck = document.querySelector("#useCheck");
     const privacyCheck = document.querySelector("#privacyCheck");
-    const valid = document.querySelector("input.valid");
+    const valid = document.querySelectorAll("input.valid");
+    console.log(useCheck.checked);
+    console.log(privacyCheck.checked);
+    console.log(valid);
     if (useCheck.checked && privacyCheck.checked && valid.length == 5) {
+      const memberId = document.querySelector("#memberId").value;
+      const memberPw = document.querySelector("#memberPw").value;
+      const memberName = document.querySelector("#memberName").value;
+      const memberEmail = document.querySelector("#memberEmail").value;
+      const param = {
+        memberId: memberId,
+        memberPw: memberPw,
+        memberName: memberName,
+        memberEmail: memberEmail,
+      };
+      axios.post("/member/enroll", param).then((res) => {
+        console.log(res.data);
+      });
     } else {
       alert("약관체크나, 입력값 확인, 디자인은 나중에");
     }
