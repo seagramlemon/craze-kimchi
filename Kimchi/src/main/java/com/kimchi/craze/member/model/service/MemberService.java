@@ -3,6 +3,7 @@ package com.kimchi.craze.member.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,8 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	@Autowired
 	private EmailSender emailSender;
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 
 	public Member selectOneMember(String memberId) {
 		// TODO Auto-generated method stub
@@ -33,6 +36,8 @@ public class MemberService {
 	@Transactional
 	public int insertMember(Member member) {
 		// TODO Auto-generated method stub
+		String encodePw = bcrypt.encode(member.getMemberPw());
+		member.setMemberPw(encodePw);
 		return memberMapper.insertMember(member);
 	}
 	
