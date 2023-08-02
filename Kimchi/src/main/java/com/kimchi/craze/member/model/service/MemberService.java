@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kimchi.craze.EmailSender;
 import com.kimchi.craze.member.model.dao.MemberMapper;
@@ -28,6 +29,11 @@ public class MemberService {
 		}else {
 			return emailSender.authMail(member.getMemberEmail());
 		}
+	}
+	@Transactional
+	public int insertMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberMapper.insertMember(member);
 	}
 	
 	

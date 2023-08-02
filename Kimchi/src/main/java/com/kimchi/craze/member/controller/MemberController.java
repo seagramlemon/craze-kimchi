@@ -30,6 +30,9 @@ public class MemberController {
 		return memberService.sendMail(member);
 	}
 	
-	
+	@PostMapping(value="enroll")
+	public int insertMember(@RequestBody Member member) {
+		return memberService.insertMember(member);
+	}
 	
 }

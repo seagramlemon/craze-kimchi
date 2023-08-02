@@ -7,6 +7,9 @@
 	<select id="emailCheck" resultType="string">
 		select count(*) from member where member_email = #{memberEmail}
 	</select>
+	<insert id="insertMember">
+		insert into member values(#{memberId},#{memberPw},#{memberName},#{memberEmail},sysdate,default)
+	</insert>
 </mapper>
 
 

@@ -221,7 +221,15 @@ const MemberJoin = () => {
     checkFunction: inputStatusCheck,
     msg: emailMsg,
   });
-
+  const memberEnroll = () => {
+    const useCheck = document.querySelector("#useCheck");
+    const privacyCheck = document.querySelector("#privacyCheck");
+    const valid = document.querySelector("input.valid");
+    if (useCheck.checked && privacyCheck.checked && valid.length == 5) {
+    } else {
+      alert("약관체크나, 입력값 확인, 디자인은 나중에");
+    }
+  };
   return (
     <>
       <div className="joinWrap">
@@ -303,7 +311,7 @@ const MemberJoin = () => {
           </div>
         </div>
         <div className="join-btn">
-          <Button content="가입하기" className="btn" />
+          <Button content="가입하기" className="btn" func={memberEnroll} />
         </div>
       </div>
       <EmailModal
