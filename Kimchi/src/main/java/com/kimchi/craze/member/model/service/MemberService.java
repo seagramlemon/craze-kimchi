@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kimchi.craze.EmailSender;
 import com.kimchi.craze.member.model.dao.MemberMapper;
 import com.kimchi.craze.member.model.vo.Member;
 
@@ -12,16 +13,24 @@ import com.kimchi.craze.member.model.vo.Member;
 public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
-	
-	public List<Member> selectMemberList() {
-		
-		return memberMapper.memberList();
+	@Autowired
+	private EmailSender emailSender;
+
+	public Member selectOneMember(String memberId) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectOneMember(memberId);
 	}
 
-	public Member selectOneMember(Member member) {
-		// TODO Auto-generated method stub
-		return memberMapper.selectOne(member);
+	public String sendMail(Member member) {
+		String check = memberMapper.emailCheck(member.getMemberEmail());
+		if(check.equals("1")){
+			return "1";
+		}else {
+			return emailSender.authMail(member.getMemberEmail());
+		}
 	}
+	
+	
 
 	
 

@@ -8,6 +8,7 @@ import ReviewContent from "./review/ReviewContent";
 import CommunityContent from "./community/CommunityContent";
 import LoginContent from "./member/LoginContent";
 import { Routes, Route, Link } from "react-router-dom";
+import MemberJoin from "./member/MemberJoin";
 
 function Main() {
   return (
@@ -21,6 +22,7 @@ function Main() {
           <Route path="/review" element={<ReviewContent />} />
           <Route path="/community" element={<CommunityContent />} />
           <Route path="/login" element={<LoginContent />} />
+          <Route path="/join" element={<MemberJoin />} />
         </Routes>
       </div>
       <Footer />

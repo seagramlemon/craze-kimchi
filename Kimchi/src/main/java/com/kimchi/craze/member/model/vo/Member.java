@@ -14,6 +14,7 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private int memberAge;
-	private int memberLevel;
+	private String memberEmail;
+	private String enrollDate;
+	private int memberType;
 }

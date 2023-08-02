@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import SwiperCore, { Autoplay } from "swiper";
 import { useState } from "react";
-import {Routes, Route, Link} from 'react-router-dom';
+import { Routes, Route, Link } from "react-router-dom";
 
 function Header() {
   const [swiper, setSwiper] = useState(null);
@@ -36,17 +36,17 @@ function Header() {
         {/* <div className="search-box">
           <input type="text" id="searchInput"></input>
           <button>
-            <span id="search-btn" class="material-icons">
+            <span id="search-btn" className="material-icons">
               search
             </span>
           </button>
         </div> */}
         <div className="member-link">
-          <Link to="#" title="로그인">
-            <span class="material-icons">login</span>
+          <Link to="login" title="로그인">
+            <span className="material-icons">login</span>
           </Link>
-          <Link to="login" title="회원가입">
-            <span class="material-icons">assignment_ind</span>
+          <Link to="join" title="회원가입">
+            <span className="material-icons">assignment_ind</span>
           </Link>
         </div>
       </div>
