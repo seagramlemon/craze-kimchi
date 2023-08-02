@@ -13,7 +13,7 @@ import ProductEnrollForm from "./product/ProductEnrollForm";
 
 function Main() {
   return (
-    <div>
+    <div className="all-wrap">
       <Header />
       <div className="container">
         <Routes>

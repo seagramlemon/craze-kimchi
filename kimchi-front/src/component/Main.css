@@ -2,6 +2,14 @@ div {
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
 }
+.all-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.all-wrap > div {
+  width: 100%;
+}
 .outer {
   width: 1000px;
   height: 1800px;
@@ -28,4 +36,5 @@ div {
 }
 .container {
   min-width: 1440px;
+  flex: 1;
 }

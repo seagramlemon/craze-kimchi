@@ -7,14 +7,14 @@
   padding: 30px;
   text-align: center;
 }
-.input-wrap:first-of-type {
+.joinWrap .input-wrap:first-of-type {
   border-top: 2px solid #f44336;
 }
-.input-wrap:nth-of-type(5) {
+.joinWrap .input-wrap:nth-of-type(5) {
   border-bottom: 2px solid #000;
 }
 
-.input-wrap {
+.joinWrap .input-wrap {
   box-sizing: border-box;
   padding: 15px 30px;
   display: flex;
@@ -22,13 +22,13 @@
   align-items: center;
   border-bottom: 1px solid #eee;
 }
-.input-wrap > div:first-child {
+.joinWrap .input-wrap > div:first-child {
   width: 25%;
 }
-.input-wrap > div:last-child {
+.joinWrap .input-wrap > div:last-child {
   width: 75%;
 }
-.input-wrap label {
+.joinWrap .input-wrap label {
   display: block;
   font-weight: bold;
   font-size: 1.1em;
@@ -39,25 +39,23 @@
   float: right;
   width: 25%;
 }
-.input-wrap p {
+.joinWrap .input-wrap p {
   padding-top: 5px;
   padding-left: 5px;
   height: 14px;
   line-height: 14px;
   font-size: 14px;
+  clear: both;
 }
-.input-wrap .valid ~ p {
+.joinWrap .input-wrap .valid ~ p {
   color: #198754;
 }
-.input-wrap .invalid ~ p {
+.joinWrap .input-wrap .invalid ~ p {
   color: #dc3545;
 }
 #memberEmail {
   width: 70%;
   float: left;
-}
-.input-wrap p {
-  clear: both;
 }
 .policy-wrap {
   padding: 15px;

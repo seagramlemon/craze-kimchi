@@ -1,0 +1,39 @@
+.login-wrap {
+  width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.login-wrap .input-wrap {
+  position: relative;
+}
+.login-wrap > div {
+  margin: 40px;
+}
+.login-wrap .input-wrap > input {
+  border-width: 1px;
+}
+.login-wrap .input-wrap > label {
+  position: absolute;
+  background-color: #fff;
+  top: -8px;
+  left: 5px;
+  font-size: 0.9em;
+  font-weight: 900;
+  color: #bbb;
+}
+
+.login-wrap .button-wrap > button {
+  background-color: #f44336;
+  color: #fff;
+  font-size: 1.2em;
+}
+.link-wrap {
+  text-align: right;
+}
+.link-wrap > a {
+  margin-left: 20px;
+}
+.link-wrap > a:hover {
+  text-decoration: underline;
+}

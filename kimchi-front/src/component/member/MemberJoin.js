@@ -236,10 +236,10 @@ const MemberJoin = () => {
       const memberName = document.querySelector("#memberName").value;
       const memberEmail = document.querySelector("#memberEmail").value;
       const param = {
-        memberId: memberId,
-        memberPw: memberPw,
-        memberName: memberName,
-        memberEmail: memberEmail,
+        memberId,
+        memberPw,
+        memberName,
+        memberEmail,
       };
       axios.post("/member/enroll", param).then((res) => {
         if (res.data == 1) {
