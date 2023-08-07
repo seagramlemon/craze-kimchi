@@ -3,7 +3,7 @@ import ProductItem from "./ProductItem";
 import ProductList from "./ProductList";
 
 function ProductContent() {
-  const productList = [
+  const productList = [ /* 여긴 수요일에 마저 진행 예정!! */
     {
       img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
       productName: "파김치 2kg",
