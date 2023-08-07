@@ -3,13 +3,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import SwiperCore, { Autoplay } from "swiper";
 import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Header() {
+function Header(props) {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
+  console.log("header : " + isLogin);
   const [swiper, setSwiper] = useState(null);
-
   SwiperCore.use([Autoplay]);
+  const navigate = useNavigate();
+  const logout = () => {
+    axios.get("/member/logout").then((res) => {
+      window.localStorage.removeItem("token");
+      setIsLogin(false);
 
+      axios.defaults.headers.common["Authorization"] = null;
+      navigate("/");
+    });
+  };
   const swiperParams = {
     navigation: false,
     onSwiper: setSwiper,
@@ -21,7 +33,7 @@ function Header() {
     <header>
       <div className="header">
         <div className="site-logo">
-          <a href="/">
+          <Link to="/">
             <Swiper {...swiperParams} ref={setSwiper}>
               <SwiperSlide>
                 <div className="site-top"></div>
@@ -30,7 +42,7 @@ function Header() {
                 <div className="site-bottom"></div>
               </SwiperSlide>
             </Swiper>
-          </a>
+          </Link>
         </div>
 
         {/* <div className="search-box">
@@ -42,12 +54,25 @@ function Header() {
           </button>
         </div> */}
         <div className="member-link">
-          <Link to="login" title="로그인">
-            <span className="material-icons">login</span>
-          </Link>
-          <Link to="join" title="회원가입">
-            <span className="material-icons">assignment_ind</span>
-          </Link>
+          {isLogin ? (
+            <>
+              <Link to="mypage" title="마이페이지">
+                <span className="material-icons">person</span>
+              </Link>
+              <Link to="#" title="로그아웃" onClick={logout}>
+                <span className="material-icons">logout</span>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="login" title="로그인">
+                <span className="material-icons">login</span>
+              </Link>
+              <Link to="join" title="회원가입">
+                <span className="material-icons">assignment_ind</span>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <div className="main-nav">
