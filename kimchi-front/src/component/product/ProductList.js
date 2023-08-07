@@ -9,7 +9,6 @@ const ProductList = (props) => {
   let navigate = useNavigate(); 
 
   const insertProduct = () => {
-
     navigate("/insert.pr");
   };
 
