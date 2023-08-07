@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kimchi.craze.product.model.dao.ProductMapper">
+	<insert id="insertProduct">
+		INSERT INTO PRODUCT(PRODUCT_NO
+						  , PRODUCT_NAME
+						  , PRICE
+						  , DETAIL
+						  ,	THUMBNAIL_IMG
+						  ,	AMOUNT)	
+					 VALUES(PRODUCT_SEQ.NEXTVAL
+					 	  , #{productName}
+					 	  , #{price}
+					 	  , #{detail}
+					 	  , #{thumbnailImg}
+					 	  , #{amount})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
