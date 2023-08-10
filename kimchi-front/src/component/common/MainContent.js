@@ -6,27 +6,30 @@ import SwiperCore, { Autoplay } from "swiper";
 import { useState } from "react";
 import ProductItem from "../product/ProductItem";
 import ProductList from "../product/ProductList";
+import {useEffect} from 'react';
+import axios from "axios";
 
 function MainContent() {
   const [swiper, setSwiper] = useState(null);
-  const productList = [
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-  ];
-  console.log(productList);
+
+  let [productList, setProductList] = useState([]);
+
+  useEffect(function() {
+
+      let url = "/product/list";
+
+      axios({
+          url : url,
+          method : "get"
+      }).then(function(response) {
+          setProductList(response.data);
+      })
+      .catch(function() {
+          console.log("상품 리스트 조회용 ajax 통신 실패!");
+      });
+
+  }, []);
+
   SwiperCore.use([Autoplay]);
 
   const swiperParams = {

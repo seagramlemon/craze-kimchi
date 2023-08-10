@@ -3,11 +3,13 @@ package com.kimchi.craze.product.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,11 +51,17 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		
-		product.setThumbnailImg("resources/productFiles" + changeName);
+		product.setThumbnailImg("http://localhost:8888/resources/productFiles/" + changeName);
 		
 		return productService.insertProduct(product);
 	}
 
-	
+	@GetMapping(value="list")
+	public ArrayList<Product> selectListProduct() {
+		
+		ArrayList<Product> list = productService.selectListProduct();
+		
+		return list;
+	}
 	
 }
