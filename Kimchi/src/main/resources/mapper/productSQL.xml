@@ -15,6 +15,18 @@
 					 	  , #{thumbnailImg}
 					 	  , #{amount})
 	</insert>
+	
+	<select id="selectListProduct" resultType="product">
+		SELECT PRODUCT_NO
+			 , PRODUCT_NAME
+			 , PRICE
+			 , DETAIL
+			 , THUMBNAIL_IMG
+			 , AMOUNT
+			 , VIEW_COUNT
+		  FROM PRODUCT
+		 WHERE STATUS = 'Y'
+	</select>
 </mapper>
 
 

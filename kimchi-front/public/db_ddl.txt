@@ -57,3 +57,6 @@ CREATE SEQUENCE PRODUCT_IMG_SEQ;
 
 SELECT * FROM USER_TABLES;
 SELECT * FROM USER_SEQUENCES;
+
+-- 상품 썸네일이미지 경로 자료형 수정 (바이트)
+alter table product modify thumbnail_img varchar2(128);

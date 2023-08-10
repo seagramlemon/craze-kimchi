@@ -1,40 +1,30 @@
 import "./ProductContent.css";
 import ProductItem from "./ProductItem";
 import ProductList from "./ProductList";
+import {useState} from 'react';
+import {useEffect} from 'react';
+import axios from "axios";
 
 function ProductContent() {
-  const productList = [ /* 여긴 수요일에 마저 진행 예정!! */
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-    {
-      img: "https://thekimchi.co.kr/web/product/medium/201708/1298_shop1_192255.jpg",
-      productName: "파김치 2kg",
-      price: "30,000원",
-    },
-  ];
+
+  let [productList, setProductList] = useState([]);
+
+  useEffect(function() {
+
+      let url = "/product/list";
+
+      axios({
+          url : url,
+          method : "get"
+      }).then(function(response) {
+          setProductList(response.data);
+      })
+      .catch(function() {
+          console.log("상품 리스트 조회용 ajax 통신 실패!");
+      });
+
+  }, []);
+
   return (
     <div>
       <div>
