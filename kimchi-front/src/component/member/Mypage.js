@@ -5,6 +5,7 @@ import "./Mypage.css";
 import NoticeContent from "../notice/NoticeContent";
 import MemberAdmin from "./MemberAdmin";
 import { useNavigate } from "react-router-dom";
+import AdminProduct from "../product/AdminProduct";
 
 const SideMenu = (props) => {
   const menus = props.children;
@@ -24,6 +25,7 @@ const Mypage = () => {
   const [myContent, setMyContent] = useState([]);
   const menus = [
     { title: "공지사항 관리", content: <NoticeContent />, type: 1 },
+    { title: "상품 관리", content: <AdminProduct />, type: 1 },
     { title: "회원 관리", content: <MemberAdmin />, type: 1 },
     { title: "공지사항 관리2", content: <NoticeContent />, type: 2 },
     { title: "회원 관리2", content: <MemberAdmin />, type: 2 },
