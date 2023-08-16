@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,14 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@Value("${file.upload.path.windows}")
+	private String windowsPath;
+
+	@Value("${file.upload.path.mac}")
+	private String macPath;
+
+	String osName = System.getProperty("os.name").toLowerCase();
+	
 	@PostMapping(value="insert")
 	public int insertProduct(@ModelAttribute Product product, 
 							 @ModelAttribute MultipartFile upfile, 
@@ -40,18 +49,18 @@ public class ProductController {
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
 		String changeName = currentTime + ranNum + ext;
-		
-		String savePath = session.getServletContext().getRealPath("/resources/productFiles/");
+	
+		String basePath = (osName.contains("win")) ? windowsPath : macPath;
 
 		try {
-			upfile.transferTo(new File(savePath + changeName));
+			upfile.transferTo(new File(basePath + changeName));
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		product.setThumbnailImg("http://localhost:8888/resources/productFiles/" + changeName);
+		product.setThumbnailImg(changeName);
 		
 		return productService.insertProduct(product);
 	}
@@ -60,6 +69,8 @@ public class ProductController {
 	public ArrayList<Product> selectListProduct() {
 		
 		ArrayList<Product> list = productService.selectListProduct();
+		
+		System.out.println(list);
 		
 		return list;
 	}
