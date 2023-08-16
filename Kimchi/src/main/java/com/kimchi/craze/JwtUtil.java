@@ -26,7 +26,11 @@ public class JwtUtil {
 		System.out.println("token22 :"+token);
 		System.out.println("utils22 : "+secretKey);
 		Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
-		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getExpiration().before(new Date());
+		try {
+			return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getExpiration().before(new Date());
+		}catch(Exception e) {
+			return true;
+		}
 	}
 	public static String getUserId(String token, String secretKey) {
 		Key key = Keys.hmacShaKeyFor(secretKey.getBytes());

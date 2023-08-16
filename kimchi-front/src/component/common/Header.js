@@ -9,11 +9,11 @@ import axios from "axios";
 function Header(props) {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
-  console.log("header : " + isLogin);
   const [swiper, setSwiper] = useState(null);
   SwiperCore.use([Autoplay]);
   const navigate = useNavigate();
   const logout = () => {
+    console.log(1111);
     axios.get("/member/logout").then((res) => {
       window.localStorage.removeItem("token");
       setIsLogin(false);

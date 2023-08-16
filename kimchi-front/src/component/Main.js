@@ -10,11 +10,15 @@ import LoginContent from "./member/LoginContent";
 import { Routes, Route, Link } from "react-router-dom";
 import MemberJoin from "./member/MemberJoin";
 import ProductEnrollForm from "./product/ProductEnrollForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Mypage from "./member/Mypage";
 
 function Main() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(null);
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    setIsLogin(token != null);
+  });
   return (
     <div className="all-wrap">
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />

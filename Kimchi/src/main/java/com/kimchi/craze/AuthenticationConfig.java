@@ -29,7 +29,7 @@ public class AuthenticationConfig {
         		.csrf().disable()				//
         		.cors().and()
         		.authorizeRequests()		//request를 인증
-        		.antMatchers(HttpMethod.POST,"/member/login","/member/enroll").permitAll()			//인증 안해도 되는url
+        		.antMatchers(HttpMethod.POST,"/member/login","/member/enroll","/member/authMail").permitAll()			//인증 안해도 되는url
         		.antMatchers(HttpMethod.POST).authenticated()	//인증 해야하는 url
         		.antMatchers(HttpMethod.GET,"/member/mypage").authenticated()
         		.and()

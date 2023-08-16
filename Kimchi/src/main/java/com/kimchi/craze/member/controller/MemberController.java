@@ -17,7 +17,6 @@ import com.kimchi.craze.member.model.vo.Member;
 @RestController(value = "memberController")
 @RequestMapping(value="/member")
 public class MemberController {
-	
 	@Autowired
 	private MemberService memberService;
 	
