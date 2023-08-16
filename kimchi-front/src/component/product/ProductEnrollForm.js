@@ -26,7 +26,8 @@ function ProductEnrollForm() {
             method : "post",
             data : form,
             headers : {processData : false, 
-                       contentType : "multipart/form-data"}
+                       contentType : "multipart/form-data",
+                       Authorization: `Bearer ${window.localStorage.getItem("token")}`}
         }).then(function(response) {            
             console.log(response.data);
         }).catch(function() {

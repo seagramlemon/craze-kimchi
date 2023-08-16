@@ -21,7 +21,7 @@
 			 , PRODUCT_NAME
 			 , PRICE
 			 , DETAIL
-			 , THUMBNAIL_IMG
+			 , 'http://localhost:8888/product/' || THUMBNAIL_IMG "THUMBNAIL_IMG"
 			 , AMOUNT
 			 , VIEW_COUNT
 		  FROM PRODUCT
