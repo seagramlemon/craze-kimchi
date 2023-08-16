@@ -50,32 +50,34 @@ const Mypage = () => {
 
   return (
     <div className="mypage">
-      <div className="mypage-title">
-        {member.memberType == 1 ? "관리자페이지" : "마이페이지"}
+      <div className="mypage-title">마이페이지 디자인용 영역</div>
+      <div className="mypage-left">
+        <div className="sub-title">
+          {member.memberType == 1 ? "관리자페이지" : "마이페이지"}
+        </div>
+        <SideMenu>
+          {menus.map((item, index) => {
+            if (item.type === member.memberType) {
+              return (
+                <div
+                  key={"navi" + index}
+                  onClick={(e) => {
+                    const menu = document.querySelectorAll(".mypage-side>div");
+                    menu.forEach((m) => {
+                      m.classList.remove("active-tab");
+                    });
+                    e.currentTarget.classList.add("active-tab");
+                    setMyContent(item.content);
+                  }}
+                >
+                  <span>{item.title}</span>
+                  <span className="material-icons">keyboard_arrow_right</span>
+                </div>
+              );
+            }
+          })}
+        </SideMenu>
       </div>
-      <SideMenu>
-        {menus.map((item, index) => {
-          if (item.type === member.memberType) {
-            return (
-              <div
-                key={"navi" + index}
-                onClick={(e) => {
-                  const menu = document.querySelectorAll(".mypage-side>div");
-                  menu.forEach((m) => {
-                    m.classList.remove("active-tab");
-                  });
-
-                  e.currentTarget.classList.add("active-tab");
-                  setMyContent(item.content);
-                }}
-              >
-                <span>{item.title}</span>
-                <span className="material-icons">keyboard_arrow_right</span>
-              </div>
-            );
-          }
-        })}
-      </SideMenu>
       <div className="mypage-content">{myContent}</div>
     </div>
   );

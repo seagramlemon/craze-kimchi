@@ -4,23 +4,30 @@
   overflow: hidden;
 }
 .mypage-title {
-  padding: 30px 30px;
+  padding: 30px;
   font-size: 1.4em;
   font-weight: bold;
   border-bottom: 3px solid #f44336;
 }
-
-.mypage-side {
+.mypage-left {
   width: 250px;
-  height: 500px;
   float: left;
 }
+.mypage-left > .sub-title {
+  padding: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .mypage-side > div {
   cursor: pointer;
   padding: 20px 50px;
   display: flex;
   align-items: center;
   position: relative;
+  border-top: 1px solid #ccc;
+}
+.mypage-side > div:last-child {
   border-bottom: 1px solid #ccc;
 }
 .mypage-side > div > span {
