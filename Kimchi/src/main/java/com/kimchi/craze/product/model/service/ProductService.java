@@ -1,5 +1,7 @@
 package com.kimchi.craze.product.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class ProductService {
 
 	public int insertProduct(Product product) {
 		return productMapper.insertProduct(product);
+	}
+
+	public ArrayList<Product> selectListProduct() {
+		return productMapper.selectListProduct();
 	}
 
 }

@@ -5,7 +5,7 @@ function ProductItem(props) {
   return (
     <div className="productItem">
       <div className="imgContent">
-        <img src={product.img} />
+        <img src={product.thumbnailImg} />
       </div>
       <div className="textContent">
         <span className="productName">{product.productName}</span> <br />
