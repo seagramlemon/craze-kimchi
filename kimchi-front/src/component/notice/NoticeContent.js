@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import "./NoticeContent.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import TextEditor from "../util/TextEditor";
 function NoticeContent() {
+  const [status, setStatus] = useState(true);
   const [noticeList, setNoticeList] = useState([]);
   useEffect(() => {
     axios.get("/notice/list").then((res) => {
@@ -12,40 +14,15 @@ function NoticeContent() {
   return (
     <div className="admin-notice">
       <div className="page-title">공지사항</div>
-      <table className="notice-table">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>조회수</th>
-            <th>작성일</th>
-            <th>상태</th>
-          </tr>
-        </thead>
-        <tbody>
-          {noticeList.map((notice, index) => {
-            return (
-              <tr key={"notice" + index}>
-                <td>{index + 1}</td>
-                <td>
-                  <Link to={"/notice" + notice.noticeNo}>
-                    {notice.noticeTitle}
-                  </Link>
-                </td>
-                <td>{notice.noticeReadCount}</td>
-                <td>{notice.noticeRegDate}</td>
-                <td>
-                  <StautsSwitch
-                    noticeStatus={notice.noticeStatus}
-                    noticeNo={notice.noticeNo}
-                    setNoticeList={setNoticeList}
-                  />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {status ? (
+        <NoticeList
+          noticeList={noticeList}
+          setNoticeList={setNoticeList}
+          setStatus={setStatus}
+        />
+      ) : (
+        <NoticeWriteFrm />
+      )}
     </div>
   );
 }
@@ -110,5 +87,76 @@ const changeStatus = (input, noticeNo, setNoticeList) => {
         setNoticeList(res.data);
       }
     });
+};
+
+const NoticeList = (props) => {
+  const noticeList = props.noticeList;
+  const setNoticeList = props.setNoticeList;
+  const setStatus = props.setStatus;
+  return (
+    <>
+      <button
+        onClick={() => {
+          setStatus(false);
+        }}
+      >
+        글쓰기
+      </button>
+      <table className="notice-table">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>조회수</th>
+            <th>작성일</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {noticeList.map((notice, index) => {
+            return (
+              <tr key={"notice" + index}>
+                <td>{index + 1}</td>
+                <td>
+                  <Link to={"/notice" + notice.noticeNo}>
+                    {notice.noticeTitle}
+                  </Link>
+                </td>
+                <td>{notice.noticeReadCount}</td>
+                <td>{notice.noticeRegDate}</td>
+                <td>
+                  <StautsSwitch
+                    noticeStatus={notice.noticeStatus}
+                    noticeNo={notice.noticeNo}
+                    setNoticeList={setNoticeList}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  );
+};
+const NoticeWriteFrm = (props) => {
+  const [notice, setNoticeContent] = useState("");
+  return (
+    <div className="noticeWriteFrm">
+      <div className="notice-title-box">
+        <input
+          type="text"
+          className="input-form"
+          placeholder="제목을 입력하세요"
+        />
+      </div>
+      <div className="notice-content-box">
+        <TextEditor data={notice} setData={setNoticeContent} />
+      </div>
+      <div className="notice-write-btn">
+        <button className="btn">작성하기</button>
+      </div>
+    </div>
+  );
 };
 export default NoticeContent;

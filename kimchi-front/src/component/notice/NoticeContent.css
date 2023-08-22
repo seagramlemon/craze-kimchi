@@ -87,3 +87,26 @@
 .toggleButton {
   transition: all 0.2s ease-in;
 }
+.noticeWriteFrm > div {
+  border: 1px solid #ccc;
+  margin: 7px;
+}
+.noticeWriteFrm input {
+  border: none;
+}
+.noticeWriteFrm .quill > div {
+  border: none;
+}
+.noticeWriteFrm .quill > div.ql-toolbar {
+  border-bottom: 1px solid #ccc;
+}
+.noticeWriteFrm .quill .ql-container {
+  height: 400px;
+}
+.noticeWriteFrm > .notice-write-btn {
+  border: none;
+}
+.notice-write-btn > button {
+  background-color: #f44336;
+  color: #fff;
+}
