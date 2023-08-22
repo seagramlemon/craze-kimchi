@@ -94,6 +94,9 @@
 .noticeWriteFrm input {
   border: none;
 }
+.noticeWriteFrm input:focus {
+  box-shadow: none;
+}
 .noticeWriteFrm .quill > div {
   border: none;
 }
@@ -109,4 +112,11 @@
 .notice-write-btn > button {
   background-color: #f44336;
   color: #fff;
+}
+#notice-reg-btn {
+  background-color: #f44336;
+  color: #fff;
+  width: auto;
+  float: right;
+  margin-bottom: 10px;
 }

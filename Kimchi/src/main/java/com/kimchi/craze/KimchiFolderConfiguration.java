@@ -26,5 +26,6 @@ public class KimchiFolderConfiguration implements WebMvcConfigurer {
 		String basePath = (osName.contains("win")) ? windowsPath : macPath;
 		
 		registry.addResourceHandler("/product/**").addResourceLocations("file:///" + basePath);
+		registry.addResourceHandler("/notice/editor/**").addResourceLocations("file:///" + basePath+"notice/editor/");
 	}
 }

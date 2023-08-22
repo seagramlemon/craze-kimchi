@@ -29,7 +29,6 @@ function NoticeContent() {
 
 const StautsSwitch = (props) => {
   const setNoticeList = props.setNoticeList;
-  console.log("스위치함수", setNoticeList);
   return (
     <>
       {props.noticeStatus == 1 ? (
@@ -90,17 +89,20 @@ const changeStatus = (input, noticeNo, setNoticeList) => {
 };
 
 const NoticeList = (props) => {
+  console.log("리스트");
   const noticeList = props.noticeList;
   const setNoticeList = props.setNoticeList;
   const setStatus = props.setStatus;
   return (
     <>
       <button
+        id="notice-reg-btn"
+        className="btn"
         onClick={() => {
           setStatus(false);
         }}
       >
-        글쓰기
+        공지사항 작성
       </button>
       <table className="notice-table">
         <thead>
@@ -109,7 +111,7 @@ const NoticeList = (props) => {
             <th>제목</th>
             <th>조회수</th>
             <th>작성일</th>
-            <th>상태</th>
+            <th>공개</th>
           </tr>
         </thead>
         <tbody>
@@ -139,8 +141,39 @@ const NoticeList = (props) => {
     </>
   );
 };
+
 const NoticeWriteFrm = (props) => {
-  const [notice, setNoticeContent] = useState("");
+  const [noticeTitle, setNoticeTitle] = useState("");
+  const [noticeContent, setNoticeContent] = useState("");
+  const [upfiles, setUpfiles] = useState([]);
+  const fileChange = (e) => {
+    setUpfiles(e.currentTarget.files);
+  };
+  const titleChange = (e) => {
+    setNoticeTitle(e.currentTarget.value);
+  };
+  const registNotice = () => {
+    const form = new FormData();
+    form.append("noticeTitle", noticeTitle);
+    form.append("noticeContent", noticeContent);
+    form.append("upfiles", upfiles);
+    axios({
+      url: "/notice/insert",
+      method: "post",
+      data: form,
+      headers: {
+        processData: false,
+        contentType: "multipart/form-data",
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function () {
+        console.log("실패");
+      });
+  };
   return (
     <div className="noticeWriteFrm">
       <div className="notice-title-box">
@@ -148,13 +181,24 @@ const NoticeWriteFrm = (props) => {
           type="text"
           className="input-form"
           placeholder="제목을 입력하세요"
+          value={noticeTitle}
+          onChange={titleChange}
         />
       </div>
+      <div className="notice-file">
+        <input type="file" multiple className="btn" onChange={fileChange} />
+      </div>
       <div className="notice-content-box">
-        <TextEditor data={notice} setData={setNoticeContent} />
+        <TextEditor
+          data={noticeContent}
+          setData={setNoticeContent}
+          placeholder="공지사항 내용을 입력하세요..."
+        />
       </div>
       <div className="notice-write-btn">
-        <button className="btn">작성하기</button>
+        <button className="btn" onClick={registNotice}>
+          작성하기
+        </button>
       </div>
     </div>
   );
