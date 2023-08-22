@@ -11,9 +11,9 @@ function PagingBar(props) {
             {
                 list.map((item) => {
                     if(currentPage === item) {
-                        return (<PagingItem pageNo={item} currentPage={true} setCurrentPage={setCurrentPage}/>);
+                        return (<PagingItem key={"paging" + item} pageNo={item} currentPage={true} setCurrentPage={setCurrentPage}/>);
                     } else {
-                        return (<PagingItem pageNo={item} currentPage={false} setCurrentPage={setCurrentPage} />);
+                        return (<PagingItem key={"paging" + item} pageNo={item} currentPage={false} setCurrentPage={setCurrentPage} />);
                     } 
                 })
             }

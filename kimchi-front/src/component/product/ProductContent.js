@@ -26,7 +26,7 @@ function ProductContent() {
           url : url,
           method : "get"
       }).then(function(response) {
-          //setProductList(response.data.list);
+          setProductList(response.data.list);
           console.log("axios",productList);
           let paging = [];
           for(let i = response.data.pi.startPage; i <= response.data.pi.endPage; i++ ) {
@@ -48,7 +48,7 @@ function ProductContent() {
       <ProductList>
         {productList.map((item) => {
           console.log(item);
-          return <ProductItem product={item} />;
+          return <ProductItem key={"product" + item.productNo} product={item} />;
         })}
       </ProductList>
 
