@@ -1,6 +1,7 @@
 package com.kimchi.craze.product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,16 @@ public class ProductService {
 		return productMapper.insertProduct(product);
 	}
 
-	public ArrayList<Product> selectListProduct() {
-		return productMapper.selectListProduct();
+	public int selectListCount() {
+		return productMapper.selectListCount();
+	}
+
+	public ArrayList<Product> selectListProduct(HashMap<String, Integer> hm) {
+		return productMapper.selectListProduct(hm);
+	}
+
+	public ArrayList<Product> selectMainListProduct() {
+		return productMapper.selectMainListProduct();
 	}
 
 }

@@ -16,16 +16,38 @@
 					 	  , #{amount})
 	</insert>
 	
-	<select id="selectListProduct" resultType="product">
-		SELECT PRODUCT_NO
-			 , PRODUCT_NAME
-			 , PRICE
-			 , DETAIL
-			 , 'http://localhost:8888/product/' || THUMBNAIL_IMG "THUMBNAIL_IMG"
-			 , AMOUNT
-			 , VIEW_COUNT
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
 		  FROM PRODUCT
 		 WHERE STATUS = 'Y'
+	</select>
+	
+	<select id="selectListProduct" resultType="product">
+		SELECT *
+		FROM (SELECT ROWNUM RNUM, P.*
+		        FROM (SELECT PRODUCT_NO
+		                   , PRODUCT_NAME
+		                   , PRICE
+		                   , DETAIL
+		                   , 'http://localhost:8888/product/' || THUMBNAIL_IMG "THUMBNAIL_IMG"
+		                   , AMOUNT
+		                   , VIEW_COUNT
+		                FROM PRODUCT
+		               WHERE STATUS = 'Y'
+		               ORDER BY PRODUCT_NO DESC) P)
+		 WHERE RNUM BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="selectMainListProduct" resultType="product">
+		SELECT PRODUCT_NO
+             , PRODUCT_NAME
+             , PRICE
+             , DETAIL
+             , 'http://localhost:8888/product/' || THUMBNAIL_IMG "THUMBNAIL_IMG"
+             , AMOUNT
+             , VIEW_COUNT
+          FROM PRODUCT
+         WHERE STATUS = 'Y'
 	</select>
 </mapper>
 
