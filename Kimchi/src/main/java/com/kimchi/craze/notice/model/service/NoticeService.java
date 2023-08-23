@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kimchi.craze.notice.model.dao.NoticeMapper;
 import com.kimchi.craze.notice.model.vo.Notice;
+import com.kimchi.craze.notice.model.vo.NoticeFile;
 
 @Service
 public class NoticeService {
@@ -24,6 +26,17 @@ public class NoticeService {
 			return null;
 		}
 		return noticeMapper.selectNoticeList();
+	}
+	@Transactional
+	public int insertNotice(Notice n) {
+		int result = noticeMapper.insertNotice(n);
+		System.out.println("noticeNo : "+n.getNoticeNo());
+		for(Object obj : n.getFileList()) {
+			NoticeFile nf = (NoticeFile)obj;
+			nf.setNoticeNo(n.getNoticeNo());
+			result += noticeMapper.insertNoticeFile(nf);
+		}
+		return result;
 	}
 
 }

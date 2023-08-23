@@ -21,7 +21,7 @@ function NoticeContent() {
           setStatus={setStatus}
         />
       ) : (
-        <NoticeWriteFrm />
+        <NoticeWriteFrm setStatus={setStatus} />
       )}
     </div>
   );
@@ -89,7 +89,6 @@ const changeStatus = (input, noticeNo, setNoticeList) => {
 };
 
 const NoticeList = (props) => {
-  console.log("리스트");
   const noticeList = props.noticeList;
   const setNoticeList = props.setNoticeList;
   const setStatus = props.setStatus;
@@ -143,11 +142,21 @@ const NoticeList = (props) => {
 };
 
 const NoticeWriteFrm = (props) => {
+  const setStatus = props.setStatus;
   const [noticeTitle, setNoticeTitle] = useState("");
   const [noticeContent, setNoticeContent] = useState("");
   const [upfiles, setUpfiles] = useState([]);
+  const [showfiles, setShowfiles] = useState([]);
   const fileChange = (e) => {
     setUpfiles(e.currentTarget.files);
+    const arr = new Array();
+    for (let i = 0; i < e.currentTarget.files.length; i++) {
+      const filename = e.currentTarget.files[i].name;
+      const filesize = e.currentTarget.files[i].size;
+      const obj = { filename, filesize };
+      arr.push(obj);
+    }
+    setShowfiles(arr);
   };
   const titleChange = (e) => {
     setNoticeTitle(e.currentTarget.value);
@@ -156,7 +165,11 @@ const NoticeWriteFrm = (props) => {
     const form = new FormData();
     form.append("noticeTitle", noticeTitle);
     form.append("noticeContent", noticeContent);
-    form.append("upfiles", upfiles);
+    console.log(upfiles);
+    for (let i = 0; i < upfiles.length; i++) {
+      form.append("upfiles", upfiles[i]);
+    }
+    //form.append("upfiles", document.querySelector("#notice-file").files);
     axios({
       url: "/notice/insert",
       method: "post",
@@ -168,7 +181,9 @@ const NoticeWriteFrm = (props) => {
       },
     })
       .then(function (response) {
-        console.log(response.data);
+        if (response.data == 1) {
+          setStatus(true);
+        }
       })
       .catch(function () {
         console.log("실패");
@@ -185,9 +200,19 @@ const NoticeWriteFrm = (props) => {
           onChange={titleChange}
         />
       </div>
-      <div className="notice-file">
-        <input type="file" multiple className="btn" onChange={fileChange} />
+
+      <div className="notice-file-zone">
+        {showfiles.map((file, idx) => {
+          return <UploadFile file={file} key={"n-file" + idx} />;
+        })}
       </div>
+      <input
+        type="file"
+        multiple
+        className="btn"
+        onChange={fileChange}
+        id="notice-file"
+      />
       <div className="notice-content-box">
         <TextEditor
           data={noticeContent}
@@ -200,6 +225,35 @@ const NoticeWriteFrm = (props) => {
           작성하기
         </button>
       </div>
+    </div>
+  );
+};
+const UploadFile = (props) => {
+  const filename = props.file.filename;
+  let filesize = props.file.filesize;
+  let unit = " (Byte)";
+  let count = 1;
+  while (true) {
+    if (filesize / 1024 < 0) {
+      break;
+    } else {
+      filesize = filesize / 1024;
+      count++;
+    }
+  }
+  if (count === 2) {
+    unit = " (KB)";
+  } else if (count === 3) {
+    unit = " (MB)";
+  } else if (count === 4) {
+    unit = " (GB)";
+  }
+
+  return (
+    <div className="notice-file">
+      <span className="material-icons delete-file">close</span>
+      <span className="filename">{filename}</span>
+      <span className="filesize">{filesize + unit}</span>
     </div>
   );
 };

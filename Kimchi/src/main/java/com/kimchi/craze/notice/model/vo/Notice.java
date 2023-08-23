@@ -1,5 +1,7 @@
 package com.kimchi.craze.notice.model.vo;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -17,4 +19,5 @@ public class Notice {
 	private int noticeReadCount;
 	private String noticeRegDate;
 	private int noticeStatus;
+	private List fileList;
 }

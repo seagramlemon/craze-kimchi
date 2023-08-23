@@ -49,19 +49,29 @@ public class NoticeController {
 	
 	@PostMapping(value="/insert")
 	public int insert(@ModelAttribute Notice n, @ModelAttribute MultipartFile[] upfiles) {
+		System.out.println(n);
+		System.out.println(upfiles.length);
 		ArrayList<NoticeFile> list = new ArrayList<NoticeFile>();
+		
 		if(!upfiles[0].isEmpty()) {
 			String basePath = (osName.contains("win")) ? windowsPath : macPath;
 			basePath += "notice/file/";
 			for(MultipartFile file : upfiles) {
 				String noticeFileImg = fileutil.getFilepath(basePath, file.getOriginalFilename(), file);
 				NoticeFile noticeFile = new NoticeFile();
-				noticeFile.setNoticFileImg(noticeFileImg);
+				noticeFile.setNoticeFileImg(noticeFileImg);
 				list.add(noticeFile);
 			}
 		}
-		int result = 0;
-		return result;
+		n.setFileList(list);
+		int result = noticeService.insertNotice(n);
+		if(result == 1+list.size()) {
+			return 1;
+		}else {
+			return 0;
+		}
+		
+		
 	}
 	
 	

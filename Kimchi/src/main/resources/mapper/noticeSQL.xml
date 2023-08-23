@@ -14,7 +14,15 @@
 	<update id="changeStatus">
 		update notice set notice_status = #{noticeStatus} where notice_no=#{noticeNo}
 	</update>
-	
+	<insert id="insertNotice">
+		insert into notice values(notice_seq.nextval,#{noticeTitle},#{noticeContent},0,sysdate,1)
+		<selectKey keyProperty="noticeNo" resultType="int" order="AFTER">
+			select max(notice_no) from notice 
+		</selectKey>
+	</insert>
+	<insert id="insertNoticeFile">
+		insert into notice_img values(notice_img_seq.nextval,#{noticeFileImg},#{noticeNo})
+	</insert>
 	
 </mapper>
 
