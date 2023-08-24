@@ -234,13 +234,14 @@ const UploadFile = (props) => {
   let unit = " (Byte)";
   let count = 1;
   while (true) {
-    if (filesize / 1024 < 0) {
+    if (filesize / 1024 < 1) {
       break;
     } else {
       filesize = filesize / 1024;
       count++;
     }
   }
+  filesize = Math.round(filesize * 100) / 100;
   if (count === 2) {
     unit = " (KB)";
   } else if (count === 3) {
