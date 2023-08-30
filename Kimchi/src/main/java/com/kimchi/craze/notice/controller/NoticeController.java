@@ -49,11 +49,10 @@ public class NoticeController {
 	
 	@PostMapping(value="/insert")
 	public int insert(@ModelAttribute Notice n, @ModelAttribute MultipartFile[] upfiles) {
-		System.out.println(n);
-		System.out.println(upfiles.length);
+		
 		ArrayList<NoticeFile> list = new ArrayList<NoticeFile>();
 		
-		if(!upfiles[0].isEmpty()) {
+		if(upfiles != null) {
 			String basePath = (osName.contains("win")) ? windowsPath : macPath;
 			basePath += "notice/file/";
 			for(MultipartFile file : upfiles) {

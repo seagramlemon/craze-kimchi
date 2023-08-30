@@ -21,13 +21,32 @@ function NoticeContent() {
           setStatus={setStatus}
         />
       ) : (
-        <NoticeWriteFrm setStatus={setStatus} />
+        <NoticeWriteFrm setStatus={setStatus} setNoticeList={setNoticeList} />
       )}
     </div>
   );
 }
 
 const StautsSwitch = (props) => {
+  const changeStatus = (input, noticeNo, setNoticeList) => {
+    const noticeStatus = input.checked ? 1 : 2;
+    console.log("axios", noticeStatus);
+    axios
+      .post(
+        "/notice/changeStatus",
+        { noticeNo, noticeStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data != null) {
+          setNoticeList(res.data);
+        }
+      });
+  };
   const setNoticeList = props.setNoticeList;
   return (
     <>
@@ -67,28 +86,8 @@ const StautsSwitch = (props) => {
   );
 };
 
-const changeStatus = (input, noticeNo, setNoticeList) => {
-  console.log("axios", setNoticeList);
-  console.log(input, noticeNo);
-  const noticeStatus = input.checked ? 1 : 2;
-  axios
-    .post(
-      "/notice/changeStatus",
-      { noticeNo, noticeStatus },
-      {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-        },
-      }
-    )
-    .then((res) => {
-      if (res.data != null) {
-        setNoticeList(res.data);
-      }
-    });
-};
-
 const NoticeList = (props) => {
+  console.log(1);
   const noticeList = props.noticeList;
   const setNoticeList = props.setNoticeList;
   const setStatus = props.setStatus;
@@ -142,22 +141,12 @@ const NoticeList = (props) => {
 };
 
 const NoticeWriteFrm = (props) => {
+  const setNoticeList = props.setNoticeList;
   const setStatus = props.setStatus;
   const [noticeTitle, setNoticeTitle] = useState("");
   const [noticeContent, setNoticeContent] = useState("");
-  const [upfiles, setUpfiles] = useState([]);
-  const [showfiles, setShowfiles] = useState([]);
-  const fileChange = (e) => {
-    setUpfiles(e.currentTarget.files);
-    const arr = new Array();
-    for (let i = 0; i < e.currentTarget.files.length; i++) {
-      const filename = e.currentTarget.files[i].name;
-      const filesize = e.currentTarget.files[i].size;
-      const obj = { filename, filesize };
-      arr.push(obj);
-    }
-    setShowfiles(arr);
-  };
+  const [fileList, setFileList] = useState([]);
+  let fileNo = 1;
   const titleChange = (e) => {
     setNoticeTitle(e.currentTarget.value);
   };
@@ -165,9 +154,8 @@ const NoticeWriteFrm = (props) => {
     const form = new FormData();
     form.append("noticeTitle", noticeTitle);
     form.append("noticeContent", noticeContent);
-    console.log(upfiles);
-    for (let i = 0; i < upfiles.length; i++) {
-      form.append("upfiles", upfiles[i]);
+    for (let i = 0; i < fileList.length; i++) {
+      form.append("upfiles", fileList[i].file);
     }
     //form.append("upfiles", document.querySelector("#notice-file").files);
     axios({
@@ -182,12 +170,53 @@ const NoticeWriteFrm = (props) => {
     })
       .then(function (response) {
         if (response.data == 1) {
+          axios.get("/notice/list").then((res) => {
+            setNoticeList(res.data);
+          });
           setStatus(true);
         }
       })
       .catch(function () {
         console.log("실패");
       });
+  };
+  const fileDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  const fileDrop = (e) => {
+    e.preventDefault();
+    const files = [...fileList];
+
+    for (let i = 0; i < e.dataTransfer.files.length; i++) {
+      const obj = { fileNo: fileNo++, file: e.dataTransfer.files[i] };
+      files.push(obj);
+    }
+    setFileList(files);
+
+    if (fileList.length + e.dataTransfer.files.length != 0) {
+      document.querySelector(".notice-file-msg").classList.add("hide");
+    } else {
+      document.querySelector(".notice-file-msg").classList.remove("hide");
+    }
+  };
+  const fileDragEnter = (e) => {
+    e.preventDefault();
+  };
+  const fileDragLeave = (e) => {
+    e.preventDefault();
+  };
+  const deleteFile = (fileNo) => {
+    for (let i = 0; i < fileList.length; i++) {
+      if (fileList[i].fileNo === fileNo) {
+        fileList.splice(i, 1);
+        setFileList([...fileList]);
+        break;
+      }
+    }
+    if (fileList.length == 0) {
+      document.querySelector(".notice-file-msg").classList.remove("hide");
+    }
   };
   return (
     <div className="noticeWriteFrm">
@@ -196,26 +225,34 @@ const NoticeWriteFrm = (props) => {
           type="text"
           className="input-form"
           placeholder="제목을 입력하세요"
-          value={noticeTitle}
+          value={noticeTitle || ""}
           onChange={titleChange}
         />
       </div>
 
-      <div className="notice-file-zone">
-        {showfiles.map((file, idx) => {
-          return <UploadFile file={file} key={"n-file" + idx} />;
+      <div
+        draggable
+        className="notice-file-zone"
+        onDragOver={fileDragOver}
+        onDrop={fileDrop}
+        onDragEnter={fileDragEnter}
+        onDragLeave={fileDragLeave}
+      >
+        <div className="notice-file-msg">여기에 첨부파일을 올려주세요</div>
+        {fileList.map((item, idx) => {
+          return (
+            <UploadFile
+              file={item.file}
+              index={item.fileNo}
+              key={"n-file" + idx}
+              deleteFile={deleteFile}
+            />
+          );
         })}
       </div>
-      <input
-        type="file"
-        multiple
-        className="btn"
-        onChange={fileChange}
-        id="notice-file"
-      />
       <div className="notice-content-box">
         <TextEditor
-          data={noticeContent}
+          data={noticeContent || ""}
           setData={setNoticeContent}
           placeholder="공지사항 내용을 입력하세요..."
         />
@@ -229,8 +266,11 @@ const NoticeWriteFrm = (props) => {
   );
 };
 const UploadFile = (props) => {
-  const filename = props.file.filename;
-  let filesize = props.file.filesize;
+  const file = props.file;
+  const fileNo = props.index;
+  const deleteFile = props.deleteFile;
+  const filename = file.name;
+  let filesize = file.size;
   let unit = " (Byte)";
   let count = 1;
   while (true) {
@@ -252,7 +292,14 @@ const UploadFile = (props) => {
 
   return (
     <div className="notice-file">
-      <span className="material-icons delete-file">close</span>
+      <span
+        className="material-icons delete-file"
+        onClick={() => {
+          deleteFile(fileNo, this);
+        }}
+      >
+        close
+      </span>
       <span className="filename">{filename}</span>
       <span className="filesize">{filesize + unit}</span>
     </div>

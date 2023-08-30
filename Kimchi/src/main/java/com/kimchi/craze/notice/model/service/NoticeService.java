@@ -30,7 +30,6 @@ public class NoticeService {
 	@Transactional
 	public int insertNotice(Notice n) {
 		int result = noticeMapper.insertNotice(n);
-		System.out.println("noticeNo : "+n.getNoticeNo());
 		for(Object obj : n.getFileList()) {
 			NoticeFile nf = (NoticeFile)obj;
 			nf.setNoticeNo(n.getNoticeNo());
