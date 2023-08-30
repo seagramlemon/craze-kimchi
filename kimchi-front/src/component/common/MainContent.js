@@ -16,7 +16,7 @@ function MainContent() {
 
   useEffect(function() {
 
-      let url = "/product/list";
+      let url = "/product/mainList";
 
       axios({
           url : url,

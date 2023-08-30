@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kimchi.craze.common.model.vo.PageInfo;
+import com.kimchi.craze.common.template.Pagination;
 import com.kimchi.craze.product.model.service.ProductService;
 import com.kimchi.craze.product.model.vo.Product;
 
@@ -64,15 +68,51 @@ public class ProductController {
 		
 		return productService.insertProduct(product);
 	}
-
-	@GetMapping(value="list")
-	public ArrayList<Product> selectListProduct() {
+	
+	@GetMapping(value="mainList")
+	public ArrayList<Product> selectMainListProduct() {
 		
-		ArrayList<Product> list = productService.selectListProduct();
-		
-		System.out.println(list);
+		ArrayList<Product> list = productService.selectMainListProduct();
 		
 		return list;
+	}
+
+	@GetMapping(value="list")
+	public HashMap<String, Object> selectListProduct(@RequestParam(defaultValue="1") int currentPage) {
+		
+		int listCount = productService.selectListCount();
+		
+		int pageLimit = 5;
+		int boardLimit = 6;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		HashMap<String, Integer> hm = new HashMap<>();
+
+		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		hm.put("startRow", startRow);
+		hm.put("endRow", endRow);
+		
+		ArrayList<Product> list = productService.selectListProduct(hm);
+		
+		System.out.println();
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		System.out.println();
+		
+		System.out.println(pi);
+		
+		System.out.println();
+		
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("list", list);
+		result.put("pi", pi);
+		
+		return result;
+		
 	}
 	
 }
