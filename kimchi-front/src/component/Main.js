@@ -12,6 +12,7 @@ import MemberJoin from "./member/MemberJoin";
 import ProductEnrollForm from "./product/ProductEnrollForm";
 import { useEffect, useState } from "react";
 import Mypage from "./member/Mypage";
+import ProductDetail from "./product/ProductDetail";
 
 function Main() {
   const [isLogin, setIsLogin] = useState(null);
@@ -36,6 +37,7 @@ function Main() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/join" element={<MemberJoin />} />
           <Route path="/insert.pr" element={<ProductEnrollForm />} />
+          <Route path="/product/detail" element={<ProductDetail />} />
         </Routes>
       </div>
       <Footer />

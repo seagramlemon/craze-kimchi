@@ -1,9 +1,18 @@
 import { useState } from "react";
 import "./ProductItem.css";
+import { useNavigate } from "react-router-dom";
+
 function ProductItem(props) {
+
+  const navigate = useNavigate();
   const [product, setProduct] = useState(props.product);
+
+  const productClick = () => {
+    navigate("detail", {state : {product:product}});
+  };
+
   return (
-    <div className="productItem">
+    <div className="productItem" onClick={productClick}>
       <div className="imgContent">
         <img src={product.thumbnailImg} />
       </div>
