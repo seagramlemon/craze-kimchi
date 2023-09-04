@@ -25,6 +25,9 @@
   text-align: left;
   padding: 20px;
 }
+.notice-view-tbl > tbody > tr > td.notice-content > div {
+  min-height: 350px;
+}
 .notice-view-tbl .notice-file {
   padding: 10px;
   display: flex;
