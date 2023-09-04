@@ -21,9 +21,53 @@
 		</selectKey>
 	</insert>
 	<insert id="insertNoticeFile">
-		insert into notice_img values(notice_img_seq.nextval,#{noticeFileImg},#{noticeNo})
+		insert into notice_file values(notice_file_seq.nextval,#{noticeNo},#{noticeFileName},#{noticeFilePath})
 	</insert>
-	
+	<select id="totalCount" resultType="int">
+		select count(*) from notice
+	</select>
+	<select id="list" resultType="notice">
+		SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM 
+			(select 
+				notice_no,
+				notice_title,
+				notice_read_count,
+				to_char(notice_reg_date,'yyyy-mm-dd') as notice_reg_date,
+				notice_status
+			from notice where notice_status=1 ORDER BY 1 DESC)N) WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	<update id="updateReadCount">
+		update notice set notice_read_count = notice_read_count+1 where notice_no=#{noticeNo}
+	</update>
+	<select id="noticeDetail" resultMap="getNoticeFile">
+		select 
+			notice_no,
+			notice_title,
+			notice_content,
+			notice_read_count,
+			to_char(notice_reg_date,'yyyy-mm-dd') as notice_reg_date
+		 from notice where notice_no=#{noticeNo}
+	</select>
+	<select id="noticeFileList" resultType="noticeFile">
+		select * from notice_file where notice_no=#{noticeNo}
+	</select>
+	<resultMap type="notice" id="getNoticeFile">
+		<result column="notice_no" property="noticeNo"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="notice_content" property="noticeContent"/>
+		<result column="notice_read_count" property="noticeReadCount"/>
+		<result column="notice_reg_date" property="noticeRegDate"/>
+		<collection 
+			property="fileList"
+			ofType="noticeFile"
+			javaType="java.util.List"
+			column="notice_no"
+			select="noticeFileList"
+		/>
+	</resultMap>
+	<select id="getNoticeFile" resultType="noticeFile">
+		select * from notice_file where notice_file_no = #{noticeFileNo}
+	</select>
 </mapper>
 
 

@@ -12,6 +12,8 @@ import MemberJoin from "./member/MemberJoin";
 import ProductEnrollForm from "./product/ProductEnrollForm";
 import { useEffect, useState } from "react";
 import Mypage from "./member/Mypage";
+import NoticeList from "./notice/NoticeList";
+import NoticeView from "./notice/NoticeView";
 
 function Main() {
   const [isLogin, setIsLogin] = useState(null);
@@ -26,7 +28,8 @@ function Main() {
         <Routes>
           <Route path="/" element={<MainContent />} />
           <Route path="/product" element={<ProductContent />} />
-          <Route path="/notice" element={<NoticeContent />} />
+          <Route path="/notice" element={<NoticeList />} />
+          <Route path="/notice/view" element={<NoticeView />} />
           <Route path="/review" element={<ReviewContent />} />
           <Route path="/community" element={<CommunityContent />} />
           <Route

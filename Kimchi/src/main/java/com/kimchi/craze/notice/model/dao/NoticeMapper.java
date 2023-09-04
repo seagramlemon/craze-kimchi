@@ -1,5 +1,6 @@
 package com.kimchi.craze.notice.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,6 +18,16 @@ public interface NoticeMapper {
 	int insertNotice(Notice n);
 
 	int insertNoticeFile(NoticeFile nf);
+
+	int totalCount();
+
+	List list(HashMap<String, Object> param);
+
+	int updateReadCount(int noticeNo);
+
+	Notice noticeDetail(int noticeNo);
+
+	NoticeFile getNoticeFile(int fileNo);
 
 	
 

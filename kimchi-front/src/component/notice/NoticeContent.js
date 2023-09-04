@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NoticeContent.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,7 +7,8 @@ function NoticeContent() {
   const [status, setStatus] = useState(true);
   const [noticeList, setNoticeList] = useState([]);
   useEffect(() => {
-    axios.get("/notice/list").then((res) => {
+    axios.get("/notice/allList").then((res) => {
+      console.log("전체목록");
       setNoticeList(res.data);
     });
   }, []);
@@ -91,6 +92,7 @@ const NoticeList = (props) => {
   const noticeList = props.noticeList;
   const setNoticeList = props.setNoticeList;
   const setStatus = props.setStatus;
+  const navigate = useNavigate();
   return (
     <>
       <button
@@ -118,9 +120,15 @@ const NoticeList = (props) => {
               <tr key={"notice" + index}>
                 <td>{index + 1}</td>
                 <td>
-                  <Link to={"/notice" + notice.noticeNo}>
+                  <span
+                    onClick={() => {
+                      navigate("/notice/view", {
+                        state: { noticeNo: notice.noticeNo },
+                      });
+                    }}
+                  >
                     {notice.noticeTitle}
-                  </Link>
+                  </span>
                 </td>
                 <td>{notice.noticeReadCount}</td>
                 <td>{notice.noticeRegDate}</td>
@@ -146,6 +154,7 @@ const NoticeWriteFrm = (props) => {
   const [noticeTitle, setNoticeTitle] = useState("");
   const [noticeContent, setNoticeContent] = useState("");
   const [fileList, setFileList] = useState([]);
+  const navigate = useNavigate();
   let fileNo = 1;
   const titleChange = (e) => {
     setNoticeTitle(e.currentTarget.value);
@@ -170,7 +179,7 @@ const NoticeWriteFrm = (props) => {
     })
       .then(function (response) {
         if (response.data == 1) {
-          axios.get("/notice/list").then((res) => {
+          axios.get("/notice/allList").then((res) => {
             setNoticeList(res.data);
           });
           setStatus(true);

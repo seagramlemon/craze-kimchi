@@ -1,0 +1,59 @@
+.notice-list {
+  width: 1200px;
+  margin: 20px auto;
+}
+.notice-list > .notice-title {
+  padding: 20px 0px;
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.notice-list > .notice-title > span {
+  font-size: 24px;
+  font-weight: bold;
+}
+.notice-list > .notice-title > span:last-child {
+  position: absolute;
+  top: 20px;
+  margin-left: 10px;
+  color: #f44336;
+}
+.notice-tbl {
+  width: 80%;
+  margin: 10px auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.notice-tbl > thead > tr {
+  border-top: 2px solid #f44336;
+  border-bottom: 2px solid black;
+}
+.notice-tbl > tbody > tr {
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+.notice-tbl > tbody > tr:hover {
+  background-color: #eee;
+}
+.notice-tbl td,
+.notice-tbl th {
+  text-align: center;
+  padding: 10px;
+}
+.notice-tbl > thead > tr > th:first-child {
+  width: 5%;
+}
+.notice-tbl > thead > tr > th:nth-child(2) {
+  width: 60%;
+  text-align: left;
+}
+.notice-tbl > tbody > tr > td:nth-child(2) {
+  text-align: left;
+}
+.notice-tbl > thead > tr > th:nth-child(3) {
+  width: 10%;
+}
+.notice-tbl > thead > tr > th:last-child {
+  width: 20%;
+}

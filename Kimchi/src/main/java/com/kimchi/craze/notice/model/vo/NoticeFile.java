@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Alias(value="noticeFile")
 public class NoticeFile {
 	private int noticeFileNo;
-	private String noticeFileImg;
 	private int noticeNo;
+	private String noticeFileName;
+	private String noticeFilePath;
 }
