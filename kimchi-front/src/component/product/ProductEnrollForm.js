@@ -1,15 +1,15 @@
 import "./ProductEnrollForm.css";
 import {useState} from 'react';
-import {useEffect} from 'react';
 import axios from "axios";
+import ProductTextEditor from "./ProductTextEditor";
 
 function ProductEnrollForm() {
 
+    let [detail, setDetail] = useState("");
     const insertProduct = () => {
         
         let productName = document.getElementById("productName").value;
         let price = document.getElementById("price").value;
-        let detail = document.getElementById("detail").value;
         let amount = document.getElementById("amount").value;
         let upfile = document.getElementById("thumbnailImg").files[0];
 
@@ -20,6 +20,12 @@ function ProductEnrollForm() {
         form.append("detail", detail);
         form.append("amount", amount);
         form.append("upfile", upfile);
+
+        console.log(productName);
+        console.log(price);
+        console.log(detail);
+        console.log(amount);
+        console.log(upfile);
 
         axios({
             url : "/product/insert",
@@ -51,7 +57,15 @@ function ProductEnrollForm() {
                         </tr>
                         <tr>
                             <th>제품설명</th>
-                            <td><textarea id="detail" className="input-form" /></td>
+                            <td>
+                                <div className="product-content-box">
+                                    <ProductTextEditor
+                                        data={detail || ""}
+                                        setData={setDetail}
+                                        placeholder="상품 상세 설명 입력"
+                                    />
+                                </div>    
+                            </td>
                         </tr>
                         <tr>
                             <th>제품썸네일</th>

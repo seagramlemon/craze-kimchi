@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kimchi.craze.FileUtil;
 import com.kimchi.craze.common.model.vo.PageInfo;
 import com.kimchi.craze.common.template.Pagination;
 import com.kimchi.craze.product.model.service.ProductService;
@@ -30,6 +31,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private FileUtil fileutil;
 	
 	@Value("${file.upload.path.windows}")
 	private String windowsPath;
@@ -67,6 +71,34 @@ public class ProductController {
 		product.setThumbnailImg(changeName);
 		
 		return productService.insertProduct(product);
+	}
+	
+	@PostMapping(value = "/contentImg")
+	public String contentImg(@ModelAttribute MultipartFile image) {
+		
+		System.out.println(image);
+		
+		String originName = image.getOriginalFilename();
+
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+
+		int ranNum = (int)(Math.random() * 90000 + 10000);
+
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+	
+		String basePath = (osName.contains("win")) ? windowsPath : macPath;
+		
+		try {
+			image.transferTo(new File(basePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "http://localhost:8888/product/" + changeName;
 	}
 	
 	@GetMapping(value="mainList")

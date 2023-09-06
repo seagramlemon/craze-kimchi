@@ -39,7 +39,7 @@ function Main() {
           />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/join" element={<MemberJoin />} />
-          <Route path="/insert.pr" element={<ProductEnrollForm />} />
+          <Route path="/product/enrollForm" element={<ProductEnrollForm />} />
           <Route path="/product/detail" element={<ProductDetail />} />
         </Routes>
       </div>

@@ -16,7 +16,7 @@ const AdminProduct = () => {
   let navigate = useNavigate(); 
 
   const insertProduct = () => {
-    navigate("/insert.pr");
+    navigate("/product/enrollForm");
   };
 
   useEffect(function() {

@@ -39,12 +39,8 @@ function ProductDetail() {
                 <table>
                     <tbody>
                         <tr>
-                            <td width="100" height="70">상품설명</td>
-                            <td width="300">{product.detail}</td>
-                        </tr>
-                        <tr>
-                            <td height="70">판매단위</td>
-                            <td>1개</td>
+                            <td width="150" height="70">판매단위</td>
+                            <td width="300">1개</td>
                         </tr>
                         <tr>
                             <td height="70">수량선택</td>
@@ -62,8 +58,7 @@ function ProductDetail() {
                     </tbody>
                 </table>
             </div>
-            <div className="productDetail_3">
-                <img src="https://thekimchi.co.kr/web/upload/NNEditor/20230822/po.jpg" width="100%" />
+            <div className="productDetail_3" dangerouslySetInnerHTML={{ __html: product.detail }}>
             </div>
         </div>
     );
