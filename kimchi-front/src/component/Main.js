@@ -15,6 +15,7 @@ import Mypage from "./member/Mypage";
 import NoticeList from "./notice/NoticeList";
 import NoticeView from "./notice/NoticeView";
 import ProductDetail from "./product/ProductDetail";
+import ProductUpdateForm from "./product/ProductUpdateForm";
 
 function Main() {
   const [isLogin, setIsLogin] = useState(null);
@@ -41,6 +42,7 @@ function Main() {
           <Route path="/join" element={<MemberJoin />} />
           <Route path="/product/enrollForm" element={<ProductEnrollForm />} />
           <Route path="/product/detail" element={<ProductDetail />} />
+          <Route path="/product/updateForm" element={<ProductUpdateForm />} />
         </Routes>
       </div>
       <Footer />

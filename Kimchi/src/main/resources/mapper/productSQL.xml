@@ -49,6 +49,37 @@
           FROM PRODUCT
          WHERE STATUS = 'Y'
 	</select>
+	
+	<select id="selectOneProduct" parameterType="int" resultType="product">
+		SELECT PRODUCT_NO
+             , PRODUCT_NAME
+             , PRICE
+             , DETAIL
+             , 'http://localhost:8888/product/' || THUMBNAIL_IMG "THUMBNAIL_IMG"
+             , AMOUNT
+             , VIEW_COUNT
+          FROM PRODUCT
+         WHERE STATUS = 'Y'
+           AND PRODUCT_NO = #{pNo}
+	</select>
+	
+	<update id="updateProduct" parameterType="product">
+		UPDATE PRODUCT
+		   SET PRODUCT_NAME = #{productName}
+		     , PRICE = #{price}
+		     , DETAIL = #{detail}
+		     , AMOUNT = #{amount}
+		     <if test="thumbnailImg != 'null'">
+		     , THUMBNAIL_IMG = #{thumbnailImg}
+		     </if>
+		 WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
+	<update id="deleteProduct" parameterType="int">
+		UPDATE PRODUCT
+		   SET STATUS = 'N'
+		 WHERE PRODUCT_NO = #{productNo}
+	</update>
 </mapper>
 
 

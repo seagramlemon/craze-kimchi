@@ -1,0 +1,43 @@
+.productEnrollForm-wrap {
+    width: 700px;
+    margin: 50px auto;
+}
+.page-title {
+    font-size: 1.3em;
+    padding: 30px;
+    text-align: center;
+}
+.productEnrollForm-wrap table {
+    margin : auto;
+    width : 100%;
+    height : 500px;
+    border-top : 2px solid #f44336;
+    border-bottom: 2px solid #ccc;
+    font-size : 1.1em;
+}
+.productEnrollForm-wrap table .input-form {
+    width: 100%;
+    display: block;
+    padding: 0.7rem;
+    background-color: #fff;
+    outline: none;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.productEnrollForm-wrap table textarea {
+    resize : none;
+    height : 100%;
+}
+.productEnrollForm-wrap table .input-form:focus {
+    box-shadow: 0 0 0 0.1rem #eee;
+}
+.productEnrollForm-wrap .btn-area {
+    padding-top : 20px;
+    text-align : center;
+}
+.btn-area>button {
+    background-color: #f44336;
+    color: #fff;
+    width: 100%;
+}

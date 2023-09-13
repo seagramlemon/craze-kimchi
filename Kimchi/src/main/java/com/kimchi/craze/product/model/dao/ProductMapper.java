@@ -18,4 +18,10 @@ public interface ProductMapper {
 
 	ArrayList<Product> selectMainListProduct();
 
+	Product selectOneProduct(int pNo);
+
+	int updateProduct(Product p);
+
+	int deleteProduct(int productNo);
+
 }

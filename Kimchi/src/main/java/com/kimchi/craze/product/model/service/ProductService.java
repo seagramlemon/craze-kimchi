@@ -31,4 +31,16 @@ public class ProductService {
 		return productMapper.selectMainListProduct();
 	}
 
+	public Product selectOneProduct(int pNo) {
+		return productMapper.selectOneProduct(pNo);
+	}
+
+	public int updateProduct(Product p) {
+		return productMapper.updateProduct(p);
+	}
+
+	public int deleteProduct(int productNo) {
+		return productMapper.deleteProduct(productNo);
+	}
+
 }

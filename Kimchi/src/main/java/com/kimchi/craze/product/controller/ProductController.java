@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -133,11 +134,6 @@ public class ProductController {
 		for(int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
-		System.out.println();
-		
-		System.out.println(pi);
-		
-		System.out.println();
 		
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", list);
@@ -145,6 +141,24 @@ public class ProductController {
 		
 		return result;
 		
+	}
+	
+	@GetMapping(value="detail")
+	public Product selectOneProduct(int pNo) {
+		
+		return productService.selectOneProduct(pNo);
+	}
+	
+	@PostMapping(value="update")
+	public int updateProduct(@ModelAttribute Product p) {
+		
+		return productService.updateProduct(p);
+	}
+	
+	@PostMapping(value="delete")
+	public int deleteProduct(@RequestBody Product p) {
+		
+		return productService.deleteProduct(p.getProductNo());
 	}
 	
 }
